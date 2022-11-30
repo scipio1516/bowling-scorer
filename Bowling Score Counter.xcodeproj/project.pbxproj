@@ -11,6 +11,9 @@
 		6EBA38A129365BDC00B85CA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA38A029365BDC00B85CA6 /* ContentView.swift */; };
 		6EBA38A329365BDD00B85CA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EBA38A229365BDD00B85CA6 /* Assets.xcassets */; };
 		6EBA38A629365BDD00B85CA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EBA38A529365BDD00B85CA6 /* Preview Assets.xcassets */; };
+		6EEC1AB42936625C00948A15 /* impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EEC1AB32936625C00948A15 /* impact.ttf */; };
+		6EEC1AB6293662C200948A15 /* Adventure.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EEC1AB5293662C200948A15 /* Adventure.ttf */; };
+		6EEC1AB82937AE7600948A15 /* Scorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC1AB72937AE7600948A15 /* Scorer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		6EBA38A029365BDC00B85CA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6EBA38A229365BDD00B85CA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EBA38A529365BDD00B85CA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6EEC1AB32936625C00948A15 /* impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = impact.ttf; sourceTree = "<group>"; };
+		6EEC1AB5293662C200948A15 /* Adventure.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Adventure.ttf; sourceTree = "<group>"; };
+		6EEC1AB72937AE7600948A15 /* Scorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scorer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +57,11 @@
 		6EBA389D29365BDC00B85CA6 /* Bowling Score Counter */ = {
 			isa = PBXGroup;
 			children = (
+				6EEC1AB5293662C200948A15 /* Adventure.ttf */,
+				6EEC1AB32936625C00948A15 /* impact.ttf */,
 				6EBA389E29365BDC00B85CA6 /* Bowling_Score_CounterApp.swift */,
 				6EBA38A029365BDC00B85CA6 /* ContentView.swift */,
+				6EEC1AB72937AE7600948A15 /* Scorer.swift */,
 				6EBA38A229365BDD00B85CA6 /* Assets.xcassets */,
 				6EBA38A429365BDD00B85CA6 /* Preview Content */,
 			);
@@ -125,6 +134,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EEC1AB42936625C00948A15 /* impact.ttf in Resources */,
+				6EEC1AB6293662C200948A15 /* Adventure.ttf in Resources */,
 				6EBA38A629365BDD00B85CA6 /* Preview Assets.xcassets in Resources */,
 				6EBA38A329365BDD00B85CA6 /* Assets.xcassets in Resources */,
 			);
@@ -138,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBA38A129365BDC00B85CA6 /* ContentView.swift in Sources */,
+				6EEC1AB82937AE7600948A15 /* Scorer.swift in Sources */,
 				6EBA389F29365BDC00B85CA6 /* Bowling_Score_CounterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
