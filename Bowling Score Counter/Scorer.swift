@@ -17,9 +17,9 @@ struct Scorer: View {
         var isSpare: Bool
         var isStrike: Bool
     }
-    /*
-    struct frameView<Object: View {
-        let frame:
+    
+    struct frameView: View {
+        let frame: OneFrame
         var body: some View {
             VStack { Text("\(frame.firstScore)").font(.custom("AvenirNext-Bold", size: 18.0))
                     .preferredColorScheme(.dark)
@@ -33,7 +33,7 @@ struct Scorer: View {
             .border(.purple)
         }
     }
-    */
+    
     @State private var scores: [OneFrame] = [OneFrame](repeating: OneFrame(firstScore: 0, secondScore: 0, fillScore: 0, isSpare: false, isStrike: false), count: 10)
     @State private var buttons = [0,1,2,3,4,5,6,7,8,9,10]
     @State private var currentFrame = 0
@@ -42,14 +42,6 @@ struct Scorer: View {
     var body: some View {
     
         VStack {
-            Button("3") {
-                updateScore(number: 3)
-            }.padding(6.969) // hi
-                .border(.white)
-            
-                .font(.custom("AvenirNext-Bold", size: 20.0))
-                .foregroundColor(Color(red:0.99, green: 0.1, blue:0.13))
-                .background(Color(red:0.60, green: 0.60, blue:0.93))
             Text("Total: \(currentTotal)")
                 .font(.custom("AvenirNext-Bold", size: 25.0))
             HStack {
@@ -68,8 +60,8 @@ struct Scorer: View {
                 }
             }
             HStack {
-                ForEach(scores) {
-                    score in
+                ForEach(0..<10) {
+                    index in frameView(frame: scores[index])
                 }
             }
             if(currentFrame == 9) {
@@ -83,8 +75,20 @@ struct Scorer: View {
             if(currentRoll == 1) {
                 scores[currentFrame].firstScore = number
                 currentRoll += 1
+                if(scores[currentFrame].firstScore == 10) {
+                    scores[currentFrame].isStrike = true
+                    if(currentFrame == 9) {
+                        currentRoll += 1
+                    } else{
+                        currentRoll = 1
+                        currentFrame += 1
+                    }
+                }
             } else if(currentRoll == 2) {
                 scores[currentFrame].secondScore = number
+                if(scores[currentFrame].firstScore + scores[currentFrame].secondScore == 10) {
+                    scores[currentFrame].isSpare = true
+                }
                 if(currentFrame == 9) {
                     currentRoll += 1
                 } else{
@@ -92,7 +96,7 @@ struct Scorer: View {
                     currentFrame += 1
                 }
                 
-            } else if(currentRoll == 3) {
+            } else if(currentRoll == 3 && (scores[currentFrame].isStrike || scores[currentFrame].isSpare)) {
                 scores[currentFrame].fillScore = number
                 currentRoll += 1
             }
