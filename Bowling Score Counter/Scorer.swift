@@ -40,14 +40,14 @@ struct Scorer: View {
     @State private var currentTotal = 0
     @State private var currentRoll = 1
     var body: some View {
-    
+        
         VStack {
             Text("Total: \(currentTotal)")
                 .font(.custom("AvenirNext-Bold", size: 25.0))
             HStack {
                 //if I have time, make the 10 the same size as all the other ones
                 //after the first roll, show less buttons for each pin that was knocked down
-                ForEach(buttons, id: \.self) {button in if(button <= 10 - scores[currentFrame].firstScore) {
+                ForEach(buttons, id: \.self) {button in if(button <= 10 - scores[currentFrame].firstScore || (scores[currentFrame].isStrike || scores[currentFrame].isSpare)) {
                     Button("\(button)") {
                         updateScore(number: button)
                     }.padding(6.969) // hi
@@ -71,41 +71,56 @@ struct Scorer: View {
     }
     
     func updateScore(number: Int) {
-        currentTotal = calcTotal()
-            if(currentRoll == 1) {
-                scores[currentFrame].firstScore = number
-                currentRoll += 1
-                if(scores[currentFrame].firstScore == 10) {
-                    scores[currentFrame].isStrike = true
-                    if(currentFrame == 9) {
-                        currentRoll += 1
-                    } else{
-                        currentRoll = 1
-                        currentFrame += 1
-                    }
-                }
-            } else if(currentRoll == 2) {
-                scores[currentFrame].secondScore = number
-                if(scores[currentFrame].firstScore + scores[currentFrame].secondScore == 10) {
-                    scores[currentFrame].isSpare = true
-                }
+        
+        if(currentRoll == 1) {
+            scores[currentFrame].firstScore = number
+            currentRoll += 1
+            if(scores[currentFrame].firstScore == 10) {
+                scores[currentFrame].isStrike = true
                 if(currentFrame == 9) {
                     currentRoll += 1
                 } else{
                     currentRoll = 1
                     currentFrame += 1
                 }
-                
-            } else if(currentRoll == 3 && (scores[currentFrame].isStrike || scores[currentFrame].isSpare)) {
-                scores[currentFrame].fillScore = number
-                currentRoll += 1
             }
+        } else if(currentRoll == 2) {
+            scores[currentFrame].secondScore = number
+            if(scores[currentFrame].firstScore + scores[currentFrame].secondScore == 10) {
+                scores[currentFrame].isSpare = true
+            }
+            if(currentFrame == 9) {
+                currentRoll += 1
+            } else{
+                currentRoll = 1
+                currentFrame += 1
+            }
+            
+        } else if(currentRoll == 3 && (scores[currentFrame].isStrike || scores[currentFrame].isSpare)) {
+            scores[currentFrame].fillScore = number
+            currentRoll += 1
+        }
+        currentTotal = calcTotal()
         
     }
     
     func calcTotal() ->Int {
         var tempTotal = 0
         
+        for i in 0...9 {
+            tempTotal += scores[i].firstScore
+            tempTotal += scores[i].secondScore
+            
+            if(i == 8) {
+                
+            } else if(i == 9) {
+                
+            } else if(scores[i].isStrike) {
+                
+            } else if(scores[i].isSpare) {
+                tempTotal += scores[i + 1].firstScore
+            }
+        }
         
         return tempTotal
     }
