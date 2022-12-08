@@ -116,6 +116,12 @@ struct Scorer: View {
             } else if(i == 9) {
                 
             } else if(scores[i].isStrike) {
+                tempTotal += scores[i + 1].firstScore
+                if(scores[i + 1].isStrike) {
+                    tempTotal += scores[i + 2].firstScore
+                } else {
+                    tempTotal += scores[i + 1].secondScore
+                }
                 
             } else if(scores[i].isSpare) {
                 tempTotal += scores[i + 1].firstScore
