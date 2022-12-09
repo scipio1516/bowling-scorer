@@ -108,23 +108,35 @@ struct Scorer: View {
         var tempTotal = 0
         
         for i in 0...9 {
+            var extraScoreOne = 0
+            var extraScoreTwo = 0
+            
             tempTotal += scores[i].firstScore
             tempTotal += scores[i].secondScore
             
-            if(i == 8) {
+            if(i == 9) {
+                extraScoreOne = scores[i].secondScore
+                extraScoreTwo = scores[i].fillScore
+            } else {
+                extraScoreOne = scores[i + 1].firstScore
                 
-            } else if(i == 9) {
-                
-            } else if(scores[i].isStrike) {
-                tempTotal += scores[i + 1].firstScore
                 if(scores[i + 1].isStrike) {
-                    tempTotal += scores[i + 2].firstScore
+                    if(i == 8) {
+                        extraScoreTwo = scores[i + 1].fillScore
+                    } else {
+                        extraScoreTwo = scores[i + 2].firstScore
+                    }
                 } else {
-                    tempTotal += scores[i + 1].secondScore
+                    extraScoreTwo = scores[i + 1].secondScore
                 }
-                
+            }
+            
+            
+            if(scores[i].isStrike) {
+                tempTotal += extraScoreOne
+                tempTotal += extraScoreTwo
             } else if(scores[i].isSpare) {
-                tempTotal += scores[i + 1].firstScore
+                tempTotal += extraScoreOne
             }
         }
         
